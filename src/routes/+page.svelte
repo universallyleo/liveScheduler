@@ -71,12 +71,13 @@
     let fesEvt = [stage2,bbEvt3,bbEvt32,stage,bbEvt,bbEvt2,stage3,bbEvt4];
     // let fesEvt = [stage,stage2,bbEvt];
 
-    let fes = new FesEvent(date, "1230", "1300", fesEvt);
+    let fes = new FesEvent(date, "1230", "1300", fesEvt, {remark: "Wristband from 11.30am at ReNY."});
     
     // let v = { name: "Shibuya Veats", display: "Veats", slots: shows };
 </script>
 
 <div class='main'>
+    <div class="remark"> {fes.remark} </div>
     <Table {fes}></Table>
 <!-- <Column {stage}></Column> -->
 </div>
@@ -87,5 +88,9 @@
         margin: 0 auto;
         font-family: Arial, Helvetica, sans-serif ;
         font-weight: bold;
+    }
+
+    .remark{
+        margin: 1em auto;
     }
 </style>

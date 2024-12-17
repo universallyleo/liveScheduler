@@ -13,6 +13,28 @@ export interface Venue {
     capacity?: number;
 }
 
+export interface StageOption {
+    open?: string;
+}
+export interface RawStage {
+    venue: Venue;
+    shows: Array<Show>;
+    color: string;
+    opt: StageOption;
+}
+
+export interface FesOption {
+    open?: string;
+    link?: string;
+    remark?: string;
+}
+
+export interface RawFes {
+    stages: Array<RawStage>;
+    date: string;
+    opt: FesOption;
+}
+
 export interface SNS {
     web?: string;
     youtube?: string;

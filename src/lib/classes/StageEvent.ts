@@ -16,6 +16,7 @@ export class StageEvent extends RawEvent {
     color: string;
     _timeIndices: number[][];
 
+    //TODO: change to initialise from RawStage data
     constructor(
         date: string,
         open: string,

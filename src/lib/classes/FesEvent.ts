@@ -1,3 +1,4 @@
+import { type FesOption } from "./types";
 import { type StageEvent } from "./StageEvent";
 import { RawEvent } from "./RawEvent";
 import {
@@ -16,17 +17,18 @@ export class FesEvent extends RawEvent {
     _durationTime: NearestMinutes;
     _cellTime: NearestMinutes;
 
+    //TODO: change to initialise from RawFes data
     constructor(
         date: string,
         open: string,
         start: string,
         stages: Array<StageEvent>,
-        link?: string
+        opt?: FesOption
     ) {
         super(date, open, start);
         this.stages = stages;
-        this.link = link ?? "";
-        this.remark = "";
+        this.link = opt?.link ?? "";
+        this.remark = opt?.remark ?? "";
         this._durationTime = 30;
         this._cellTime = 5;
         this._timeBlocks = blocksOfMinutes(this.openTime, this.endTime);
