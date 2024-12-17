@@ -1,0 +1,30 @@
+.heading {
+    border: 1px solid black;
+    background-color: #333;
+    color: white;
+    padding: 0.5em;
+    text-align: center;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid gray; */
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* Row styling for 5-minute intervals */
+.row {
+    padding-top: 8px;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+}
+
+/* Bottom border for every 30 minutes */
+.row:nth-child(6n) {
+    background-color: #e0e0e0;
+    border-bottom: 1px solid #555;
+}
