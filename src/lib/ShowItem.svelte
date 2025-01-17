@@ -1,39 +1,46 @@
 <script lang="ts">
     import type { Show } from "./classes/types";
     import { coloniseTimeString } from "./utils";
-    let { show, color }: { show: Show, color:string } = $props();
+    let { show, color }: { show: Show | null; color: string } = $props();
 </script>
 
 <div class="card" style:background-color={color}>
-    {show.name}
-    <div class="time">{coloniseTimeString(show.startTime)} ~ {coloniseTimeString(show.endTime)}</div>
+    {#if show}
+        {show.name}
+        <div class="time">
+            {coloniseTimeString(show.startTime)} ~ {coloniseTimeString(
+                show.endTime
+            )}
+        </div>
+    {:else}
+        TBC
+    {/if}
 </div>
 
 <style>
-    .card{
+    .card {
         border-radius: 5px;
         margin: auto 0;
-        padding: .2em;
+        padding: 0.2em;
         border: 1px solid #999;
         min-width: 2em;
         /* min-height: 2ch; */
         height: 100%;
-        box-sizing: border-box;;
+        box-sizing: border-box;
         text-shadow:
-        -1px -1px 0 #fff,
-        1px -1px 0 #fff,
-        -1px 1px 0 #fff,
-        1px 1px 0 #fff;  
+            -1px -1px 0 #fff,
+            1px -1px 0 #fff,
+            -1px 1px 0 #fff,
+            1px 1px 0 #fff;
         /* allow child div to appear at bottom */
-        display:grid;
+        display: grid;
         grid-template-rows: 1fr auto;
     }
 
-    .time{
+    .time {
         font-size: smaller;
-        justify-self:end;
+        justify-self: end;
         color: white;
-        text-shadow:none;
+        text-shadow: none;
     }
 </style>
-

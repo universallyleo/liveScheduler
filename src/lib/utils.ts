@@ -8,6 +8,10 @@ import {
 } from "date-fns";
 import { TimeString } from "./classes/TimeString";
 
+export function throwIfUndefined<T>(x: T | undefined): asserts x is T {
+    if (typeof x === "undefined") throw new Error("Something undefined");
+}
+
 export function coloniseTimeString(time: string): string {
     return time[2] === ":" ? time : `${time.slice(0, 2)}:${time.slice(2)}`;
 }
@@ -112,3 +116,54 @@ export function blocksOfMinutes(
         { step: duration }
     ).map((x) => new TimeString(x).time);
 }
+
+export function sortedIndices<T>(
+    tofind: Array<T>,
+    from: Array<T>
+): Array<number> {
+    let j = 0;
+    const res = [];
+    for (let i = 0; i < from.length; i++) {
+        if (tofind[j] === from[i]) {
+            res.push(i);
+            j++;
+        }
+    }
+    return res;
+}
+
+// export type Interval = [a: number, b: number];
+// export type IntervalRelation =
+//     | "NC"
+//     | "same"
+//     | "behindCross"
+//     | "aheadCross"
+//     | "cover"
+//     | "includedBy";
+// // aheadCross:  a[0] < b[0] < a[1] < b[1]
+// // behindCross: b[0] < a[0] < b[1] < a[1]
+// export function compareInterval(a: Interval, b: Interval): IntervalRelation {
+//     if (a[0] > a[1]) a = [a[1], a[0]];
+//     if (b[0] > b[1]) b = [b[1], b[0]];
+
+//     if (a[0] <= b[0]) {
+//         if (a[1] >= b[1]) {
+//             // a0<=b0<=b1<=a1
+//             return a[0] == b[0] && a[1] == b[1] ? "same" : "cover";
+//         } else {
+//             //a[1] < b[1]
+//             return a[0] == b[0]
+//                 ? "includedBy" // b[0]=a[0] <= a[1] < b[1]
+//                 : b[0] < a[1]
+//                 ? "aheadCross" // a[0] < b[0] < a[1] < b[1]
+//                 : "NC"; // a[0] < a[1] <= b[0] < b[1]
+//         }
+//     } else {
+//         // b[0] < a[0]
+//         return a[1] >= b[1]
+//             ? "includedBy" // b[0] < a0 <= a1 <= b1
+//             : a[0] < b[1]
+//             ? "behindCross" // b0 < a0  < b1 < a1
+//             : "NC";
+//     }
+// }

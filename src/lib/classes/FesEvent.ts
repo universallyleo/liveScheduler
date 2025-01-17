@@ -7,7 +7,7 @@ import {
     toTimeString,
     blocksOfMinutes,
 } from "$lib/utils";
-import type { NearestMinutes } from "date-fns";
+import { max, type NearestMinutes } from "date-fns";
 
 export class FesEvent extends RawEvent {
     stages: Array<StageEvent>;
@@ -61,6 +61,15 @@ export class FesEvent extends RawEvent {
         return this.stages.map((stage) =>
             stage.itemTimeIndices(this._timeBlocks)
         );
+    }
+
+    alignEndTime(): void {
+        const m = toTimeString(
+            max(this.stages.map((stage) => toTimeObj(stage.endTime)))
+        );
+        for (const s of this.stages) {
+            s.endTime = m;
+        }
     }
 
     // rearrangeStage(from: number, to: number): Array<StageEvent> {
